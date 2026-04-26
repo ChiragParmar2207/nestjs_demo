@@ -1,5 +1,5 @@
 import { DataSource } from 'typeorm';
-import { getTypeOrmConfig } from './typeorm.config.js';
+import { getTypeOrmConfig } from './typeorm.config';
 
 /**
  * Standalone DataSource instance for TypeORM CLI.
