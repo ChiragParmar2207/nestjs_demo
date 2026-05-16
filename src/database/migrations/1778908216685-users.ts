@@ -2,18 +2,18 @@ import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
 import { ROLES } from '../../constants/key.constants';
 
-export class Users1777183983052 implements MigrationInterface {
+export class users1778908216685 implements MigrationInterface {
   private table = new Table({
     name: 'users',
     columns: [
       {
-        name: 'userId',
+        name: 'id',
         type: 'uuid',
         isPrimary: true,
         default: `uuid_generate_v4()`,
       },
       { name: 'name', type: 'varchar', length: '150', isNullable: false },
-      { name: 'email', type: 'varchar', length: '150', isNullable: false },
+      { name: 'email', type: 'varchar', length: '100', isNullable: false },
       { name: 'countryCode', type: 'varchar', isNullable: false },
       { name: 'phone', type: 'varchar', isNullable: false },
       { name: 'password', type: 'varchar', length: '150', isNullable: false },
@@ -24,14 +24,23 @@ export class Users1777183983052 implements MigrationInterface {
         default: `'${ROLES.USER}'`,
       },
       { name: 'isActive', type: 'boolean', default: true },
-      { name: 'createdAt', type: 'varchar', length: '10' },
-      { name: 'updatedAt', type: 'varchar', length: '10', isNullable: true },
-      { name: 'deletedAt', type: 'varchar', length: '10', isNullable: true },
+      { name: 'createdAt', type: 'timestamptz', default: 'CURRENT_TIMESTAMP' },
+      {
+        name: 'updatedAt',
+        type: 'timestamptz',
+        default: 'CURRENT_TIMESTAMP',
+        isNullable: true,
+      },
+      {
+        name: 'deletedAt',
+        type: 'timestamptz',
+        default: 'CURRENT_TIMESTAMP',
+        isNullable: true,
+      },
     ],
   });
 
   public async up(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.query(`CREATE EXTENSION IF NOT EXISTS "uuid-ossp";`);
     await queryRunner.createTable(this.table);
   }
 

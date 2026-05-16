@@ -1,22 +1,16 @@
-import {
-  BeforeInsert,
-  BeforeUpdate,
-  Column,
-  Entity,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 import { ROLES } from '../../constants/key.constants';
 
 @Entity('users')
 export class User {
-  @PrimaryGeneratedColumn('uuid', { name: 'userId' })
-  userId: string;
+  @PrimaryGeneratedColumn('uuid', { name: 'id' })
+  id: string;
 
   @Column({ type: 'varchar', length: 150 })
   name: string;
 
-  @Column({ type: 'varchar', length: 150 })
+  @Column({ type: 'varchar', length: 100 })
   email: string;
 
   @Column({ type: 'varchar' })
@@ -34,22 +28,12 @@ export class User {
   @Column({ type: 'boolean', default: true })
   isActive: boolean;
 
-  @Column({ type: 'varchar', length: 10 })
-  createdAt: string;
+  @Column({ type: 'timestamptz', default: 'CURRENT_TIMESTAMP' })
+  createdAt: Date;
 
-  @Column({ type: 'varchar', length: 10, nullable: true })
-  updatedAt: string;
+  @Column({ type: 'timestamptz', nullable: true })
+  updatedAt: Date;
 
-  @Column({ type: 'varchar', length: 10, nullable: true })
-  deletedAt: string;
-
-  @BeforeInsert()
-  setCreatedAt() {
-    this.createdAt = Math.floor(Date.now() / 1000).toString();
-  }
-
-  @BeforeUpdate()
-  setUpdatedAt() {
-    this.updatedAt = Math.floor(Date.now() / 1000).toString();
-  }
+  @Column({ type: 'timestamptz', nullable: true })
+  deletedAt: Date;
 }

@@ -8,7 +8,7 @@ dotenv.config();
  * Used by both the NestJS DatabaseModule and the standalone DataSource (CLI migrations).
  * This is the single source of truth for all DB connection settings.
  */
-export function getTypeOrmConfig(): DataSourceOptions {
+export const getTypeOrmConfig = (): DataSourceOptions => {
   return {
     type: 'postgres',
     host: process.env.DB_HOST || 'localhost',
@@ -21,4 +21,4 @@ export function getTypeOrmConfig(): DataSourceOptions {
     synchronize: false, // Always false - use migrations instead
     logging: process.env.DB_LOGGING === 'true',
   };
-}
+};

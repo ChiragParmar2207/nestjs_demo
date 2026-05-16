@@ -8,7 +8,7 @@ import { User } from '../entities/user.entity';
  * Seeds a default admin user into the database.
  * Skips insertion if an admin with the same email already exists.
  */
-export async function seedAdmin(dataSource: DataSource): Promise<void> {
+export const seedAdmin = async (dataSource: DataSource): Promise<void> => {
   const userRepository = dataSource.getRepository(User);
   const encryptService = new EncryptService();
 
@@ -35,4 +35,4 @@ export async function seedAdmin(dataSource: DataSource): Promise<void> {
 
   await userRepository.save(admin);
   console.log('Admin user seeded successfully.');
-}
+};
