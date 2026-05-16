@@ -1,4 +1,5 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
+
 import { ROLES } from '../../constants/key.constants';
 
 export class Users1777183983052 implements MigrationInterface {
@@ -11,66 +12,26 @@ export class Users1777183983052 implements MigrationInterface {
         isPrimary: true,
         default: `uuid_generate_v4()`,
       },
-      {
-        name: 'name',
-        type: 'varchar',
-        length: '150',
-        isNullable: false,
-      },
-      {
-        name: 'email',
-        type: 'varchar',
-        length: '150',
-        isNullable: false,
-      },
-      {
-        name: 'countryCode',
-        type: 'varchar',
-        isNullable: false,
-      },
-      {
-        name: 'phone',
-        type: 'varchar',
-        isNullable: false,
-      },
-      {
-        name: 'password',
-        type: 'varchar',
-        length: '150',
-        isNullable: true,
-      },
+      { name: 'name', type: 'varchar', length: '150', isNullable: false },
+      { name: 'email', type: 'varchar', length: '150', isNullable: false },
+      { name: 'countryCode', type: 'varchar', isNullable: false },
+      { name: 'phone', type: 'varchar', isNullable: false },
+      { name: 'password', type: 'varchar', length: '150', isNullable: false },
       {
         name: 'role',
         type: 'enum',
         enum: [ROLES.ADMIN, ROLES.USER],
         default: `'${ROLES.USER}'`,
       },
-      {
-        name: 'isActive',
-        type: 'boolean',
-        default: true,
-      },
-      {
-        name: 'createdAt',
-        type: 'varchar',
-        length: '10',
-      },
-      {
-        name: 'updatedAt',
-        type: 'varchar',
-        length: '10',
-        isNullable: true,
-      },
-      {
-        name: 'deletedAt',
-        type: 'varchar',
-        length: '10',
-        isNullable: true,
-      },
+      { name: 'isActive', type: 'boolean', default: true },
+      { name: 'createdAt', type: 'varchar', length: '10' },
+      { name: 'updatedAt', type: 'varchar', length: '10', isNullable: true },
+      { name: 'deletedAt', type: 'varchar', length: '10', isNullable: true },
     ],
   });
 
   public async up(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.query(`CREATE EXTENSION IF NOT EXISTS "uuid-ossp";`);
     await queryRunner.createTable(this.table);
   }
 

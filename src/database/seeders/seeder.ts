@@ -1,24 +1,9 @@
 import AppDataSource from '../data-source';
-
-/**
- * Main Seeder Runner
- *
- * Usage: npm run seed
- *
- * Add your seed functions to the `seeders` array below.
- * Each seed function receives the initialized DataSource.
- *
- * Example:
- *   import { seedUsers } from './user.seed.js';
- *   const seeders = [seedUsers];
- */
-
-// Import individual seed functions here
-// import { seedUsers } from './user.seed.js';
+import { seedAdmin } from './admin.seed';
 
 // Register all seed functions in execution order
 const seeders: Array<(dataSource: typeof AppDataSource) => Promise<void>> = [
-  // seedUsers,
+  seedAdmin,
 ];
 
 async function runSeeders(): Promise<void> {
