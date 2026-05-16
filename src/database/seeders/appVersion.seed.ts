@@ -4,8 +4,8 @@ import { DEVICE_TYPES } from '../../constants/key.constants';
 import { AppVersion } from '../entities/appVersion.entity';
 
 const appVersions = [
-  { deviceType: DEVICE_TYPES.ANDROID, version: '1' },
-  { deviceType: DEVICE_TYPES.IOS, version: '1.0.0' },
+  { deviceType: DEVICE_TYPES.ANDROID, versionCode: '1' },
+  { deviceType: DEVICE_TYPES.IOS, versionCode: '1.0.0' },
 ];
 
 export const seedAppVersions = async (

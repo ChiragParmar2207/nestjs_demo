@@ -1,6 +1,6 @@
-import AppDataSource from '../data-source';
+import AppDataSource from '../dataSource';
 import { seedAdmin } from './admin.seed';
-import { seedAppVersions } from './app-version.seed';
+import { seedAppVersions } from './appVersion.seed';
 
 // Register all seed functions in execution order
 const seeders: Array<(dataSource: typeof AppDataSource) => Promise<void>> = [
