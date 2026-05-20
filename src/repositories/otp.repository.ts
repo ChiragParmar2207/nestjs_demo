@@ -14,6 +14,7 @@ export class OtpRepository {
 
   async createOtp(email: string, otp: string): Promise<Otp> {
     await this.deleteExpiredOtpRecords();
+    await this.repository.delete({ email });
 
     const otpRecord = this.repository.create({ email, otp });
 
