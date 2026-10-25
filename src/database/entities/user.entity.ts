@@ -1,6 +1,6 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-import { ROLES } from '../../constants/key.constants';
+import { ROLES, SOCIAL_LOGIN_TYPE } from '../../constants/key.constants';
 
 @Entity('users')
 export class User {
@@ -24,6 +24,19 @@ export class User {
 
   @Column({ type: 'enum', enum: ROLES, default: ROLES.USER })
   role: ROLES;
+
+  @Column({
+    type: 'enum',
+    enum: SOCIAL_LOGIN_TYPE,
+    default: SOCIAL_LOGIN_TYPE.EMAIL,
+  })
+  socialLoginType: SOCIAL_LOGIN_TYPE;
+
+  @Column({ type: 'varchar', nullable: true })
+  googleId: string;
+
+  @Column({ type: 'varchar', nullable: true })
+  appleId: string;
 
   @Column({ type: 'boolean', default: true })
   isActive: boolean;

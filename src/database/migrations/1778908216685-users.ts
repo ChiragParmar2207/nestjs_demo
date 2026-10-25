@@ -1,6 +1,6 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-import { ROLES } from '../../constants/key.constants';
+import { ROLES, SOCIAL_LOGIN_TYPE } from '../../constants/key.constants';
 
 export class users1778908216685 implements MigrationInterface {
   private table = new Table({
@@ -22,6 +22,26 @@ export class users1778908216685 implements MigrationInterface {
         type: 'enum',
         enum: [ROLES.ADMIN, ROLES.USER],
         default: `'${ROLES.USER}'`,
+      },
+      {
+        name: 'socialLoginType',
+        type: 'enum',
+        enum: [
+          SOCIAL_LOGIN_TYPE.EMAIL,
+          SOCIAL_LOGIN_TYPE.GOOGLE,
+          SOCIAL_LOGIN_TYPE.APPLE,
+        ],
+        default: `'${SOCIAL_LOGIN_TYPE.EMAIL}'`,
+      },
+      {
+        name: 'googleId',
+        type: 'varchar',
+        isNullable: true,
+      },
+      {
+        name: 'appleId',
+        type: 'varchar',
+        isNullable: true,
       },
       { name: 'isActive', type: 'boolean', default: true },
       { name: 'createdAt', type: 'timestamptz', default: 'CURRENT_TIMESTAMP' },
